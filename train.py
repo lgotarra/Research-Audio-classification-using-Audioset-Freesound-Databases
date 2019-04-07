@@ -40,7 +40,6 @@ def train(model_name=None, hparams=None, train_csv_path=None, train_clip_dir=Non
                                            checkpoint_dir=train_dir) as sess:
       sess.raw_session().run(input_init)
       while not sess.should_stop():
-        #TODO change tensorflow sample_rate
         step, _, pred, loss = sess.run([global_step, train_op, prediction, loss_tensor])
         print(step, loss)
         sys.stdout.flush()

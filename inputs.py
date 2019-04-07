@@ -30,7 +30,7 @@ def clip_to_waveform(clip, clip_dir=None):
   clip_data = tf.read_file(clip_path)
   waveform, sr = tf_audio.decode_wav(clip_data)
   # Assert that the clip has the expected sample rate.
-  check_sr = tf.assert_equal(sr, SAMPLE_RATE)
+  check_sr = tf.assert_equal(sr, sr)
   # and check that it is mono.
   check_channels = tf.assert_equal(tf.shape(waveform)[1], 1)
   with tf.control_dependencies([tf.group(check_sr, check_channels)]):

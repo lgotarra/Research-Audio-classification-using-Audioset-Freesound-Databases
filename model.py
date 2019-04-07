@@ -25,8 +25,13 @@ def define_cnn(features=None, hparams=None):
     net = slim.conv2d(net, 150, kernel_size=[5, 5])
     net = slim.max_pool2d(net, kernel_size=[3, 3])
     net = slim.conv2d(net, 200, kernel_size=[3, 3])
-    net = tf.reduce_max(net, axis=[1,2], keepdims=True)
-    net = slim.flatten(net)
+    net = tf.reduce_max(net, axis=[1, 2], keepdims=True)
+
+    # TODO make functions callable
+    def true_fn(): return net
+    def false_fn(): return slim.flatten(net)
+    net = tf.cond(tf.equal(tf.size(net), 0), true_fn=true_fn(), false_fn=false_fn())
+
   return net
 
 def define_model(model_name=None, features=None, labels=None, num_classes=None, hparams=None,

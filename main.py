@@ -34,7 +34,7 @@ Usage:
       --model cnn \
       --sample_rate rate \
       --class_map_path /path/to/class_map.csv \
-      --eval_clip_dir /path/to/audio_train \
+      --eval_clip_dir /path/to/audio_eval \
       --eval_csv_path /path/to/validation.csv \
       --checkpoint /path/to/train_dir/model.ckpt-<N>
   (make sure to use the same hparams overrides as used in training)
@@ -196,7 +196,8 @@ def main():
                 train_dir=flags.train_dir, sample_rate=flags.sample_rate)
 
   elif flags.mode == 'eval':
-    utils.resample(sample_rate=flags.sample_rate, dir=flags.eval_clip_dir, csv_path=flags.eval_csv_path)
+      #TODO uncomment
+    #utils.resample(sample_rate=flags.sample_rate, dir=flags.eval_clip_dir, csv_path=flags.eval_csv_path)
     evaluation.evaluate(model_name=flags.model, hparams=hparams,
                         class_map_path=flags.class_map_path,
                         eval_csv_path=flags.eval_csv_path,
